@@ -22,6 +22,9 @@ public class TurnoServicioImpl implements ITurnoServicio {
 
     @Override
     public Turno guardar(Turno turno) {
+
+        //debe haber aqui una logica de que si existe el odontologo y que exista el paciente
+        //sino existe alguno de ellos, entonces que se lance una excepcion tipo BadRequest
         return iTurnoRepository.save(turno);
     }
 

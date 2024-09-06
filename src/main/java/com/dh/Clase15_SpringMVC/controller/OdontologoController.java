@@ -32,6 +32,10 @@ public class OdontologoController {
         return ResponseEntity.ok(odontologoServicio.listarTodos());
     }
 
+    @GetMapping("/matricula/{matricula}")
+    public ResponseEntity<Odontologo> buscarPorMatricula(@PathVariable String matricula){
+        return ResponseEntity.ok(odontologoServicio.buscarPorMatricula(matricula));
+    }
     //falta uldate
     //dalta eliminar
 }
