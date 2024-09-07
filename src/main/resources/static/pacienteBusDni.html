@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Buscar Paciente por DNI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/get_paciente_dni.js"></script>
+</head>
+<body>
+<div class="container">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Agregar nuevo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/pacienteList.html">Listar todos</a>
+        </li>
+    </ul>
+
+    <div id="buscar_paciente_div">
+        <h1>Buscar Paciente por DNI</h1>
+        <div class="form-group">
+            <label for="dni">DNI:</label>
+            <input type="text" class="form-control" id="dni" placeholder="Ingrese el dni">
+        </div>
+        <button id="buscar_paciente_btn" class="btn btn-primary">Buscar</button>
+    </div>
+
+    <div id="paciente_resultado" style="display: none;">
+        <h2>Resultado de la búsqueda</h2>
+        <table id="pacienteTable" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+            </tr>
+            </thead>
+            <tbody id="pacienteTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -45,4 +45,8 @@ public class PacienteController {
         return ResponseEntity.ok(iPacienteServicio.eliminar(id));
     }
 
+    @GetMapping("/dni/{dni}")
+    public ResponseEntity<Paciente> buscarPorDni(@PathVariable String dni){
+        return ResponseEntity.ok(iPacienteServicio.buscarPorDni(dni));
+    }
 }

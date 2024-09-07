@@ -30,11 +30,6 @@ public class OdontologoController {
         return ResponseEntity.ok(odontologoServicio.listarTodos());
     }
 
-    @GetMapping("/matricula/{matricula}")
-    public ResponseEntity<Odontologo> buscarPorMatricula(@PathVariable String matricula){
-        return ResponseEntity.ok(odontologoServicio.buscarPorMatricula(matricula));
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Odontologo> actualizar(@PathVariable Long id, @RequestBody Odontologo odontologo){
         return ResponseEntity.ok(odontologoServicio.actualizar(odontologo, id));
@@ -43,6 +38,11 @@ public class OdontologoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Long id){
         return ResponseEntity.ok(odontologoServicio.eliminar(id));
+    }
+
+    @GetMapping("/matricula/{matricula}")
+    public ResponseEntity<Odontologo> buscarPorMatricula(@PathVariable String matricula){
+        return ResponseEntity.ok(odontologoServicio.buscarPorMatricula(matricula));
     }
     
 }

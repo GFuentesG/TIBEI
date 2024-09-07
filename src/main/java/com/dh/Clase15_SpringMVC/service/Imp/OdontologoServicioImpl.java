@@ -33,16 +33,11 @@ public class OdontologoServicioImpl implements IOdontologoServicio {
     }
 
     @Override
-    public String eliminar(Long id) throws ResourceNotFoundException{    //agregar un chequeo de que el id del odontologo exista para poder eliminarlo
-        Optional<Odontologo> odontologoExistente = iOdontologoRepository.findById(id);
-        if(odontologoExistente.isPresent()){
-            iOdontologoRepository.deleteById(id);
-            return ("Se elimino el odontologo con el id: " + id);
-        } else {
-            throw new ResourceNotFoundException("No se encontro al Odontologo con id: " + id + " para eliminarlo");
-        }
-    }
+    public List<Odontologo> listarTodos() {
 
+        return iOdontologoRepository.findAll();
+
+    }
     @Override
     public Odontologo actualizar(Odontologo odontologo, Long id) throws  ResourceNotFoundException{         //igual detectar que exista el id
         Optional<Odontologo> odontologoExistente = iOdontologoRepository.findById(id);
@@ -53,11 +48,15 @@ public class OdontologoServicioImpl implements IOdontologoServicio {
             throw new ResourceNotFoundException("No se encontro al Odontologo con id: " + id + " para actualizarlo");
         }
     }
-
     @Override
-    public List<Odontologo> listarTodos() {
-
-        return iOdontologoRepository.findAll();
+    public String eliminar(Long id) throws ResourceNotFoundException{    //agregar un chequeo de que el id del odontologo exista para poder eliminarlo
+        Optional<Odontologo> odontologoExistente = iOdontologoRepository.findById(id);
+        if(odontologoExistente.isPresent()){
+            iOdontologoRepository.deleteById(id);
+            return ("Se elimino el odontologo con el id: " + id);
+        } else {
+            throw new ResourceNotFoundException("No se encontro al Odontologo con id: " + id + " para eliminarlo");
+        }
     }
 
     @Override

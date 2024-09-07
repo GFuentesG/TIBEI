@@ -16,8 +16,6 @@ public class PacienteServicioImpl implements IPacienteServicio {
     @Autowired
     private IPacienteRepository iPacienteRepository;
 
-
-
     //IDAO<Paciente> interfazIdao;  //aqui traemos la interfaz
 
 //    public PacienteServicioImpl() {
@@ -65,5 +63,10 @@ public class PacienteServicioImpl implements IPacienteServicio {
         } else {
             throw new ResourceNotFoundException("No se encontro al paciente con el id: " + id + " para eliminarlo");
         }
+    }
+
+    @Override
+    public Paciente buscarPorDni(String dni){
+        return iPacienteRepository.findByDni(dni);
     }
 }
