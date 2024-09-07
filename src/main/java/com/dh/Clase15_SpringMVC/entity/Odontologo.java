@@ -23,5 +23,4 @@ public class Odontologo {
     private String apellido;
     private String matricula;
 
-
 }

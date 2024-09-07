@@ -10,8 +10,8 @@ public interface IOdontologoServicio {
 
     Odontologo guardar (Odontologo odontologo);
     Odontologo buscarPorId(Long id) throws ResourceNotFoundException;
-    void eliminar (Long id);
-    void actualizar (Odontologo odontologo);
+    String eliminar (Long id);
+    Odontologo actualizar (Odontologo odontologo, Long id) throws ResourceNotFoundException;
     List<Odontologo> listarTodos();
     Odontologo buscarPorMatricula(String matricula);
 }

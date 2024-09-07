@@ -36,6 +36,16 @@ public class OdontologoController {
     public ResponseEntity<Odontologo> buscarPorMatricula(@PathVariable String matricula){
         return ResponseEntity.ok(odontologoServicio.buscarPorMatricula(matricula));
     }
-    //falta uldate
-    //dalta eliminar
+    //falta actualizar
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Odontologo> actualizar(@PathVariable Long id, @RequestBody Odontologo odontologo){
+        return ResponseEntity.ok(odontologoServicio.actualizar(odontologo, id));
+    }
+    //falta eliminar
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id){
+        return ResponseEntity.ok(odontologoServicio.eliminar(id));
+    }
+    
 }
