@@ -1,9 +1,12 @@
 package com.dh.Clase15_SpringMVC.controller;
 
+import com.dh.Clase15_SpringMVC.entity.Odontologo;
 import com.dh.Clase15_SpringMVC.entity.Paciente;
 import com.dh.Clase15_SpringMVC.service.IPacienteServicio;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")
@@ -26,6 +29,20 @@ public class PacienteController {
     @PostMapping
     public ResponseEntity<Paciente> guardar(@RequestBody Paciente paciente) {
         return ResponseEntity.ok(iPacienteServicio.guardar(paciente));
+    }
+    @GetMapping
+    public ResponseEntity<List<Paciente>> listarTodos(){
+        return ResponseEntity.ok(iPacienteServicio.listarTodos());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Paciente> actualizar(@PathVariable Long id, @RequestBody Paciente paciente){
+        return ResponseEntity.ok(iPacienteServicio.actualizar(paciente, id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable long id){
+        return ResponseEntity.ok(iPacienteServicio.eliminar(id));
     }
 
 }

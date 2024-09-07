@@ -1,6 +1,7 @@
 package com.dh.Clase15_SpringMVC.service.Imp;
 
 import com.dh.Clase15_SpringMVC.entity.Paciente;
+import com.dh.Clase15_SpringMVC.exception.ResourceNotFoundException;
 import com.dh.Clase15_SpringMVC.repository.IPacienteRepository;
 import com.dh.Clase15_SpringMVC.service.IPacienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +46,24 @@ public class PacienteServicioImpl implements IPacienteServicio {
     }
 
     @Override
-    public void actualizar(Paciente paciente) {
-        iPacienteRepository.save(paciente);
+    public Paciente actualizar(Paciente paciente, Long id) throws ResourceNotFoundException {
+        Optional<Paciente> pacienteExistente = iPacienteRepository.findById(id);
+        if(pacienteExistente.isPresent()){
+            paciente.setId(id);
+            return iPacienteRepository.save(paciente);
+        } else {
+            throw new ResourceNotFoundException("no se encontro al Paciente con id: " + id + " para actualizarlo");
+        }
     }
 
     @Override
-    public void eliminar(Long id) {
-        iPacienteRepository.deleteById(id);
+    public String eliminar(Long id) throws ResourceNotFoundException{
+        Optional<Paciente> pacienteExistente = iPacienteRepository.findById(id);
+        if(pacienteExistente.isPresent()){
+            iPacienteRepository.deleteById(id);
+            return ("Se elimino al paciente con el id: " + id);
+        } else {
+            throw new ResourceNotFoundException("No se encontro al paciente con el id: " + id + " para eliminarlo");
+        }
     }
 }

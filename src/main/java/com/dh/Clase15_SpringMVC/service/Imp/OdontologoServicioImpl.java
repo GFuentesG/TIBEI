@@ -33,7 +33,7 @@ public class OdontologoServicioImpl implements IOdontologoServicio {
     }
 
     @Override
-    public String eliminar(Long id) {    //agregar un chequeo de que el id del odontologo exista para poder eliminarlo
+    public String eliminar(Long id) throws ResourceNotFoundException{    //agregar un chequeo de que el id del odontologo exista para poder eliminarlo
         Optional<Odontologo> odontologoExistente = iOdontologoRepository.findById(id);
         if(odontologoExistente.isPresent()){
             iOdontologoRepository.deleteById(id);
