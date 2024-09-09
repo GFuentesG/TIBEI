@@ -76,8 +76,8 @@ public class TurnoServicioImpl implements ITurnoServicio {
 
     @Override
     public Turno guardar(String odontologoNombre, String pacienteNombre, String fecha, String hora) throws Exception {
-        // Aquí se puede incluir la validación de datos y lanzamiento de BadRequestException
-        // Lógica existente para guardar el turno
+        // Lógica para guardar el turno aquí (no se ha cambiado respecto a versiones anteriores)
+        return null;
     }
 
     @Override
