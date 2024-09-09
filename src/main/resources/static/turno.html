@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Turnos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Gestión de Turnos</h1>
+
+<!-- Búsqueda de odontólogos disponibles por fecha y hora -->
+<h2>Buscar odontólogos disponibles por fecha y hora</h2>
+<form id="buscar-disponibles-form">
+    <label for="fecha-disponible">Fecha:</label>
+    <input type="date" id="fecha-disponible" name="fecha" required><br>
+
+    <label for="hora-disponible">Hora:</label>
+    <input type="time" id="hora-disponible" name="hora" required><br>
+
+    <button type="submit">Buscar Odontólogos Disponibles</button>
+</form>
+<ul id="odontologos-disponibles"></ul>
+
+<!-- Búsqueda de disponibilidad por nombre de odontólogo -->
+<h2>Buscar disponibilidad de un odontólogo por nombre</h2>
+<form id="buscar-disponibilidad-odontologo-form">
+    <label for="odontologo-nombre-disponibilidad">Nombre del Odontólogo:</label>
+    <input type="text" id="odontologo-nombre-disponibilidad" name="odontologo-nombre" required><br>
+
+    <button type="submit">Buscar Disponibilidad</button>
+</form>
+<ul id="disponibilidad-odontologo"></ul>
+
+<!-- Registro de turnos -->
+<h2>Registrar Turno</h2>
+<form id="turno-form">
+    <label for="odontologo-nombre">Nombre del Odontólogo:</label>
+    <input type="text" id="odontologo-nombre" name="odontologo-nombre" required><br>
+
+    <label for="paciente-nombre">Nombre del Paciente:</label>
+    <input type="text" id="paciente-nombre" name="paciente-nombre" required><br>
+
+    <label for="fecha-turno">Fecha del Turno:</label>
+    <input type="date" id="fecha-turno" name="fecha-turno" required><br>
+
+    <label for="hora-turno">Hora del Turno:</label>
+    <input type="time" id="hora-turno" name="hora-turno" required><br>
+
+    <button type="submit">Registrar Turno</button>
+</form>
+
+<script src="app.js"></script>
+</body>
+</html>
