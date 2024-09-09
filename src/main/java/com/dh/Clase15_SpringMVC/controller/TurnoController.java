@@ -21,16 +21,18 @@ public class TurnoController {
     @Autowired
     private ITurnoServicio iTurnoServicio;
 
+    // Endpoint para buscar odontólogos disponibles en una fecha y hora específicas
     @GetMapping("/disponibles")
     public ResponseEntity<List<Odontologo>> buscarOdontologosDisponibles(
             @RequestParam("fecha") String fecha,
             @RequestParam("hora") String hora) throws BadRequestException, ResourceNotFoundException {
-        
+
         List<Odontologo> odontologosDisponibles = iTurnoServicio.buscarOdontologosDisponibles(
                 LocalDate.parse(fecha), LocalTime.parse(hora));
         return ResponseEntity.ok(odontologosDisponibles);
     }
 
+    // Endpoint para buscar la disponibilidad de un odontólogo específico por su nombre
     @GetMapping("/disponibilidad")
     public ResponseEntity<List<Turno>> buscarDisponibilidadOdontologo(
             @RequestParam("odontologoNombre") String odontologoNombre) throws ResourceNotFoundException, BadRequestException {
@@ -60,4 +62,3 @@ public class TurnoController {
         return ResponseEntity.ok(iTurnoServicio.listarTodos());
     }
 }
-
