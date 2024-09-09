@@ -2,6 +2,7 @@ package com.dh.Clase15_SpringMVC.controller;
 
 import com.dh.Clase15_SpringMVC.entity.Odontologo;
 import com.dh.Clase15_SpringMVC.entity.Turno;
+import com.dh.Clase15_SpringMVC.exception.BadRequestException;
 import com.dh.Clase15_SpringMVC.exception.ResourceNotFoundException;
 import com.dh.Clase15_SpringMVC.service.ITurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +21,19 @@ public class TurnoController {
     @Autowired
     private ITurnoServicio iTurnoServicio;
 
-    // Endpoint para buscar odontólogos disponibles en una fecha y hora específicas
     @GetMapping("/disponibles")
     public ResponseEntity<List<Odontologo>> buscarOdontologosDisponibles(
             @RequestParam("fecha") String fecha,
-            @RequestParam("hora") String hora) throws ResourceNotFoundException {
-
+            @RequestParam("hora") String hora) throws BadRequestException, ResourceNotFoundException {
+        
         List<Odontologo> odontologosDisponibles = iTurnoServicio.buscarOdontologosDisponibles(
                 LocalDate.parse(fecha), LocalTime.parse(hora));
         return ResponseEntity.ok(odontologosDisponibles);
     }
 
-    // Endpoint para buscar la disponibilidad de un odontólogo específico por su nombre
     @GetMapping("/disponibilidad")
     public ResponseEntity<List<Turno>> buscarDisponibilidadOdontologo(
-            @RequestParam("odontologoNombre") String odontologoNombre) throws ResourceNotFoundException {
+            @RequestParam("odontologoNombre") String odontologoNombre) throws ResourceNotFoundException, BadRequestException {
 
         List<Turno> turnos = iTurnoServicio.buscarDisponibilidadPorOdontologo(odontologoNombre);
         return ResponseEntity.ok(turnos);
@@ -61,3 +60,4 @@ public class TurnoController {
         return ResponseEntity.ok(iTurnoServicio.listarTodos());
     }
 }
+
