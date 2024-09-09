@@ -1,45 +1,61 @@
 package com.dh.Clase15_SpringMVC.service.Imp;
 
-
+import com.dh.Clase15_SpringMVC.entity.Odontologo;
 import com.dh.Clase15_SpringMVC.entity.Turno;
+import com.dh.Clase15_SpringMVC.exception.ResourceNotFoundException;
+import com.dh.Clase15_SpringMVC.repository.IOdontologoRepository;
 import com.dh.Clase15_SpringMVC.repository.ITurnoRepository;
 import com.dh.Clase15_SpringMVC.service.ITurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TurnoServicioImpl implements ITurnoServicio {
+
     @Autowired
     private ITurnoRepository iTurnoRepository;
 
-//    public TurnoServicioImpl(){
-//        this.iDao = new ImplementacionTurnoList();
-//    }
-
+    @Autowired
+    private IOdontologoRepository odontologoRepository;
 
     @Override
-    public Turno guardar(Turno turno) {
+    public List<Odontologo> buscarOdontologosDisponibles(LocalDate fecha, LocalTime hora) {
+        List<Odontologo> todosOdontologos = odontologoRepository.findAll();
+        List<Turno> turnosEnEsaFechaYHora = iTurnoRepository.findByFechaAndHora(fecha, hora);
 
-        //debe haber aqui una logica de que si existe el odontologo y que exista el paciente
-        //sino existe alguno de ellos, entonces que se lance una excepcion tipo BadRequest
-        return iTurnoRepository.save(turno);
+        // Obtener la lista de odontólogos ocupados en esa fecha y hora
+        List<Odontologo> odontologosOcupados = turnosEnEsaFechaYHora.stream()
+                .map(Turno::getOdontologo)
+                .collect(Collectors.toList());
+
+        // Filtrar odontólogos disponibles
+        return todosOdontologos.stream()
+                .filter(odontologo -> !odontologosOcupados.contains(odontologo))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Turno consultarPorId(Long id) {
-        Optional<Turno> turnoBuscado = iTurnoRepository.findById(id);
+    public List<Turno> buscarDisponibilidadPorOdontologo(String odontologoNombre) throws ResourceNotFoundException {
+        Odontologo odontologo = odontologoRepository.findByNombre(odontologoNombre)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el odontólogo con nombre: " + odontologoNombre));
 
-        if(!turnoBuscado.isPresent()){
-            return null;
-        } else{
-            return turnoBuscado.get();
-        }
-        //otra forma en vez del if-else
-        //return turnoBuscado.orElse(null);
+        return iTurnoRepository.findByOdontologo(odontologo);
+    }
 
+    @Override
+    public Turno guardar(String odontologoNombre, String pacienteNombre, String fecha, String hora) throws Exception {
+        // Lógica para guardar el turno
+    }
+
+    @Override
+    public Turno consultarPorId(Long id) throws ResourceNotFoundException {
+        return iTurnoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró el turno con ID: " + id));
     }
 
     @Override
