@@ -14,14 +14,19 @@ public class TurnoController {
     private ITurnoServicio iTurnoServicio;
 
 
-    @PostMapping
-    public ResponseEntity<Turno> guardar(@RequestBody Turno turno){
+     @PostMapping
+    public ResponseEntity<Turno> guardar(@RequestBody Turno turno) throws BadRequestException, ResourceNotFoundException {
+        // Aquí validamos si existen el paciente y el odontólogo
         return ResponseEntity.ok(iTurnoServicio.guardar(turno));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Turno> consultarPorId(@PathVariable Long id){
-        return ResponseEntity.ok(iTurnoServicio.consultarPorId(id));// ver cuando es nulo el lugar del id, del paciente,o odontologo, conun if que busque por id odontolo como servicio
+    public ResponseEntity<Turno> consultarPorId(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(iTurnoServicio.consultarPorId(id));
     }
 
+    @GetMapping
+    public ResponseEntity<List<Turno>> listarTodos() {
+        return ResponseEntity.ok(iTurnoServicio.listarTodos());
+    }
 }
