@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Clínica Odontológica</title>
+    <title>Clínica Odontológica DH-CARE</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -29,6 +29,21 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+        }
+
+        /* Caja para cada elemento de menú */
+        .menu-items {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        /* Titulo principal */
+        .titulo-principal {
+            margin-bottom: 100px;
+            font-size: 48px;
+            font-weight: 900;
         }
 
         /* Caja para cada elemento de menú */
@@ -91,6 +106,10 @@
 </head>
 <body>
 <div class="menu-container">
+    <h1 class="text-center text-primary titulo-principal">
+        CLÍNICA ODONTOLÓGICA<br>
+        DH-CARE</h1>
+    <div class="menu-items">
     <!-- Menú de Odontólogos -->
     <div class="menu-item">
         <img src="/img/odontologo.jpg" alt="Odontólogos">
@@ -115,6 +134,7 @@
         <h3>Turnos</h3>
         <a href="/turnoList.html" class="btn">Listado de Turnos</a>
         <a href="/turnoAlta.html" class="btn">Agendar Turnos</a>
+    </div>
     </div>
 </div>
 
