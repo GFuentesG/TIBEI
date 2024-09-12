@@ -1,55 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SERVICIO ODONTOLÓGICO GESTIÓN DE SERVICIOS</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Clínica Odontológica</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .menu-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        /* Caja para cada elemento de menú */
+        .menu-item {
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            flex: 0 1 calc(33.33% - 40px); /* Para ajustar 3 cajas por fila con espacio entre ellas */
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: auto; /* Se ajusta a su contenido */
+        }
+
+        /* Responsive para pantallas más pequeñas */
+        @media (max-width: 768px) {
+            .menu-item {
+                flex: 0 1 calc(50% - 40px); /* 2 cajas por fila */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .menu-item {
+                flex: 0 1 100%; /* 1 caja por fila */
+            }
+        }
+
+        /* Estilo para las imágenes */
+        .menu-item img {
+            width: 150px;  /* Tamaño mayor de imagen */
+            height: 150px;
+            margin: 0 auto 15px auto;
+            border-radius: 50%;  /* Opcional: imagen circular */
+        }
+
+        .menu-item h3 {
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+
+        /* Botones estilo */
+        .menu-item .btn {
+            display: block;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .menu-item .btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
 </head>
 <body>
-<!-- Encabezado -->
-<header class="header">
-    <h1>CLÍNICA ODONTOLOGICA</H1>
-    <h1>GESTIÓN DE SERVICIOS</h1>
-</header>
+<div class="menu-container">
+    <!-- Menú de Odontólogos -->
+    <div class="menu-item">
+        <img src="/img/odontologo.jpg" alt="Odontólogos">
+        <h3>Odontólogos</h3>
+        <a href="/odontologoList.html" class="btn">Listado de Odontólogos</a>
+        <a href="/odontologoAlta.html" class="btn">Alta de Odontólogos</a>
+        <a href="/odontologoBusMatri.html" class="btn">Búsqueda de Odontólogos por Matrícula</a>
+    </div>
 
-<!-- Contenido principal -->
-<main class="container">
-    <section class="selection">
-        <h2>Elige una opción</h2>
-        <div class="grid-container">
+    <!-- Menú de Pacientes -->
+    <div class="menu-item">
+        <img src="/img/paciente.jpg" alt="Pacientes">
+        <h3>Pacientes</h3>
+        <a href="/pacienteAlta.html" class="btn">Alta de Pacientes</a>
+        <a href="/pacienteList.html" class="btn">Listado de Pacientes</a>
+        <a href="/pacienteBusDni.html" class="btn">Búsqueda de Pacientes por DNI</a>
+    </div>
 
-            <!-- Opción 1: Gestión de Odontólogos -->
-            <div class="grid-item">
-                <img src="img/odontologo.jpg" alt="Gestión de Odontólogos" style="width: 100%; height: auto; border-radius: 8px;">
-                <h3>Gestión de Odontólogos</h3>
-                <p>Aquí puedes gestionar los datos de los odontólogos: alta, baja y actualización de información.</p>
-                <a href="odontologoAlta.html" class="button">Ir a Odontólogos</a>
-            </div>
+    <!-- Menú de Turnos -->
+    <div class="menu-item">
+        <img src="/img/turno.png" alt="Turnos">
+        <h3>Turnos</h3>
+        <a href="/turno.html" class="btn">Agendar Turnos</a>
+    </div>
+</div>
 
-            <!-- Opción 2: Gestión de Pacientes -->
-            <div class="grid-item">
-                <img src="img/paciente.jpg" alt="Gestión de Pacientes" style="width: 100%; height: auto; border-radius: 8px;">
-                <h3>Gestión de Pacientes</h3>
-                <p>Maneja la información de los pacientes, desde el registro hasta la actualización de sus datos.</p>
-                <a href="pacienteAlta.html" class="button">Ir a Pacientes</a>
-            </div>
-
-            <!-- Opción 3: Gestión de Turnos -->
-            <div class="grid-item">
-                <img src="img/turno.png" alt="Gestión de Turnos" style="width: 100%; height: auto; border-radius: 8px;">
-                <h3>Gestión de Turnos</h3>
-                <p>Administra los turnos de los pacientes con los odontólogos, así como la asignación de citas.</p>
-                <a href="turno.html" class="button">Ir a Turnos</a>
-            </div>
-
-        </div>
-    </section>
-</main>
-
-<!-- Pie de página -->
-<footer>
-    <p>&copy; 2024 SERVICIO ODONTOLÓGICO GESTIÓN DE SERVICIOS. Todos los derechos reservados.</p>
-</footer>
 </body>
 </html>

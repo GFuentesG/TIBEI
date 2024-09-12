@@ -1,263 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Pacientes</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="js/get_paciente.js" defer></script> <!-- Script para obtener los pacientes -->
-    <script src="js/post_paciente.js" defer></script>
-    <script src="js/delete_paciente.js" defer></script>
-    <script src="js/update_paciente.js" defer></script>
-    <script src="js/get_paciente_dni.js" defer></script>
-    <script src="js/paciente_tabs.js" defer></script> <!-- Manejo de las pestañas -->
+    <title>Agregar Pacientes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Estilos personalizados -->
     <style>
-        /* Alinear los botones en una sola fila */
-        .tabs {
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #007bff;
             margin-bottom: 20px;
+            text-align: center;
         }
 
-        .tab-button {
-            display: inline-block;
+        label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            font-size: 1.1rem;
+            border-radius: 5px;
             padding: 10px 20px;
-            margin-right: 5px;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #response {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
             border-radius: 5px;
-            font-size: 16px;
+            color: #155724;
         }
 
-        .tab-button.active {
-            background-color: #155aaf;
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
         }
 
-        .tab-button:hover {
-            background-color: #357abd;
-        }
+        @media (max-width: 576px) {
+            .container {
+                padding: 15px;
+            }
 
-        /* Botón para volver al índice */
-        #back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #555;
-            color: white;
-            padding: 8px 12px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        #back-button:hover {
-            background-color: #333;
+            .btn-danger, .btn-secondary {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-<!-- Botón de regreso al index -->
-<a href="index.html" id="back-button">Regresar</a>
+<div class="container">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/pacienteList.html">Listar Pacientes</a>
+        </li>
+    </ul>
 
-<!-- Encabezado -->
-<header class="header">
-    <h1>Gestión de Pacientes</h1>
-</header>
+    <div class="row">
+        <div class="col-sm-12" style="background-color:#e6fffa; padding:20px; border-radius:10px;">
+            <h3>Agregar Pacientes</h3>
+            <form id="add_new_paciente">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese el apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="dni">DNI:</label>
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI" required>
+                </div>
+                <div class="form-group">
+                    <label for="fechaAlta">Fecha de Alta:</label>
+                    <input type="date" class="form-control" id="fechaAlta" name="fechaAlta" required>
+                </div>
+                <div class="form-group">
+                    <label for="calle">Calle:</label>
+                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese la calle" required>
+                </div>
+                <div class="form-group">
+                    <label for="numero">Número:</label>
+                    <input type="number" class="form-control" id="numero" name="numero" placeholder="Ingrese el número" required>
+                </div>
+                <div class="form-group">
+                    <label for="localidad">Localidad:</label>
+                    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ingrese la localidad" required>
+                </div>
+                <div class="form-group">
+                    <label for="provincia">Provincia:</label>
+                    <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ingrese la provincia" required>
+                </div>
 
-<!-- Contenedor principal -->
-<main class="container">
-    <div class="tabs">
-        <!-- Pestañas -->
-        <button class="tab-button" onclick="openTab(event, 'alta')">Alta Paciente</button>
-        <button class="tab-button active" onclick="openTab(event, 'listado')">Listado de Pacientes</button> <!-- Por defecto, listado activo -->
-        <button class="tab-button" onclick="openTab(event, 'actualizar')">Actualizar Paciente</button>
-        <button class="tab-button" onclick="openTab(event, 'eliminar')">Eliminar Paciente</button>
-        <button class="tab-button" onclick="openTab(event, 'buscar')">Buscar por DNI</button>
-    </div>
+                <button type="submit" class="btn btn-danger" id="btn-add-new-paciente">Guardar</button>
+            </form>
 
-    <!-- Sección Listado de Pacientes -->
-    <div id="listado" class="tab-content" style="display: block;">
-        <h2>Listado de Pacientes</h2>
-        <table id="pacienteTable">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>DNI</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Los pacientes serán listados por el script get_paciente.js -->
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Sección Alta de Pacientes -->
-    <div id="alta" class="tab-content" style="display: none;">
-        <h2>Alta de Paciente</h2>
-        <form id="form-alta">
-            <label for="nombre-alta">Nombre:</label>
-            <input type="text" id="nombre-alta" name="nombre" required>
-
-            <label for="apellido-alta">Apellido:</label>
-            <input type="text" id="apellido-alta" name="apellido" required>
-
-            <label for="dni-alta">DNI:</label>
-            <input type="text" id="dni-alta" name="dni" required>
-
-            <label for="domicilio-alta">Domicilio:</label> <!-- Nuevo campo para domicilio -->
-            <input type="text" id="domicilio-alta" name="domicilio" required>
-
-            <button type="submit">Registrar Paciente</button>
-        </form>
-    </div>
-
-    <!-- Sección Actualizar Paciente -->
-    <div id="actualizar" class="tab-content" style="display: none;">
-        <h2>Actualizar Paciente</h2>
-        <form id="form-actualizar">
-            <label for="paciente_id-actualizar">ID:</label>
-            <input type="text" id="paciente_id-actualizar" name="paciente_id" required readonly
-                   style="background-color: #e9ecef; cursor: not-allowed; border: 1px solid #ced4da;"> <!-- Estilos para no editable -->
-
-            <label for="nombre-actualizar">Nuevo Nombre:</label>
-            <input type="text" id="nombre-actualizar" name="nombre">
-
-            <label for="apellido-actualizar">Nuevo Apellido:</label>
-            <input type="text" id="apellido-actualizar" name="apellido">
-
-            <label for="dni-actualizar">Nuevo DNI:</label>
-            <input type="text" id="dni-actualizar" name="dni">
-
-            <label for="domicilio-actualizar">Nuevo Domicilio:</label>
-            <input type="text" id="domicilio-actualizar" name="domicilio">
-
-            <button type="submit">Actualizar Paciente</button>
-        </form>
-    </div>
-
-
-
-    <!-- Sección Eliminar Paciente -->
-    <div id="eliminar" class="tab-content" style="display: none;">
-        <h2>Eliminar Paciente</h2>
-        <form id="form-eliminar">
-            <label for="dni-eliminar">DNI del Paciente:</label>
-            <input type="text" id="dni-eliminar" name="dni-eliminar" required>
-            <button type="submit">Eliminar Paciente</button>
-        </form>
-    </div>
-
-    <!-- Sección Buscar por DNI -->
-    <div id="buscar" class="tab-content" style="display: none;">
-        <h2>Buscar Paciente por DNI</h2>
-        <form id="form-buscar">
-            <label for="dni-buscar">DNI:</label>
-            <input type="text" id="dni-buscar" name="dni" required>
-            <button type="button" id="buscar_paciente_btn">Buscar</button>
-        </form>
-
-        <!-- Resultados de la búsqueda -->
-        <div id="paciente_resultado" style="display: none;">
-            <h3>Resultado:</h3>
-            <table id="pacienteTableBody">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>DNI</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Los resultados serán agregados aquí -->
-                </tbody>
-            </table>
+            <div id="response">
+                ¡Paciente agregado con éxito!
+            </div>
         </div>
     </div>
-</main>
 
-<!-- Pie de página -->
-<footer>
-    <p>&copy; 2024 Gestión de Pacientes. Todos los derechos reservados.</p>
-</footer>
+    <!-- Botón de regreso a index -->
+    <a href="/index.html" class="btn btn-secondary">Volver al Inicio</a>
+</div>
 
-<script>
-    // Confirmación antes de realizar el alta
-    document.querySelector('#form-alta').addEventListener('submit', function (event) {
-        if (!confirm('¿Estás seguro de que deseas registrar este paciente?')) {
-            event.preventDefault();
-        }
-    });
-
-    // Confirmación antes de actualizar
-    document.querySelector('#form-actualizar').addEventListener('submit', function (event) {
-        if (!confirm('¿Estás seguro de que deseas actualizar los datos de este paciente?')) {
-            event.preventDefault();
-        }
-    });
-
-    // Confirmación antes de eliminar
-    document.querySelector('#form-eliminar').addEventListener('submit', function (event) {
-        if (!confirm('¿Estás seguro de que deseas eliminar este paciente?')) {
-            event.preventDefault();
-        }
-    });
-
-    // Función para cargar los pacientes en la tabla
-    window.addEventListener('load', function () {
-        (function() {
-            const url = '/pacientes';  // Endpoint para obtener los pacientes
-            const settings = {
-                method: 'GET'
-            };
-
-            // Llamada a la API para obtener los pacientes
-            fetch(url, settings)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data); // Verificación de los datos en la consola
-                // Obtenemos la tabla donde vamos a insertar los datos
-                let tableBody = document.querySelector("#pacienteTable tbody");
-
-                // Limpiar contenido previo (si existe)
-                tableBody.innerHTML = '';
-
-                // Iteramos sobre los pacientes recibidos
-                for (let paciente of data) {
-                    // Creamos una fila para cada paciente
-                    let row = tableBody.insertRow();
-
-                    // Insertamos celdas en la fila
-                    let cellId = row.insertCell(0);
-                    let cellNombre = row.insertCell(1);
-                    let cellApellido = row.insertCell(2);
-                    let cellDni = row.insertCell(3);
-
-                    // Asignamos los datos a las celdas
-                    cellId.innerHTML = paciente.id;
-                    cellNombre.innerHTML = paciente.nombre;
-                    cellApellido.innerHTML = paciente.apellido;
-                    cellDni.innerHTML = paciente.dni;
-
-                    // Crear celdas de acciones
-                    let cellActions = row.insertCell(4);
-                    cellActions.innerHTML = `
-                        <button onclick="deleteBy(${paciente.id})">Eliminar</button>
-                        <button onclick="findBy(${paciente.id})">Actualizar</button>
-                    `;
-                }
-            })
-            .catch(error => {
-                console.error('Error al cargar los pacientes:', error);
-            });
-        })();
-    });
-</script>
-
+<script type="text/javascript" src="/js/post_paciente.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Odontologos</title>
+    <title>Odontólogos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -9,23 +9,122 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+    <!-- CSS personalizado para mejoras estéticas -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Fondo ligero */
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff; /* Color azul moderno */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-pills .nav-link {
+            font-size: 1.1rem;
+            color: #007bff;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-pills .nav-link:hover {
+            background-color: #e9ecef; /* Fondo gris claro al pasar el cursor */
+            color: #0056b3;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2; /* Fondo alternado para filas */
+        }
+
+        .table-responsive {
+            margin-bottom: 20px;
+        }
+
+        /* Estilo del formulario */
+        #div_odontologo_updating {
+            background-color: #e6fffa; /* Fondo suave */
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Mensajes de respuesta */
+        #response {
+            display: none;
+            margin: 10px;
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 15px;
+            border-radius: 5px;
+            color: #155724;
+        }
+
+    </style>
+
     <script type="text/javascript" src="/js/update_odontologo.js"></script>
     <script type="text/javascript" src="/js/delete_odontologo.js"></script>
 </head>
 <body>
 <div class="container">
+    <!-- Barra de navegación -->
     <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link" href="/">Agregar nuevo</a>
+            <a class="nav-link" href="/odontologoAlta.html">Agregar nuevo</a> <!-- Cambiado para redirigir correctamente -->
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/odontologoList.html">Listar todos</a>
         </li>
     </ul>
 
+    <!-- Tabla de odontólogos -->
     <div id="div_odontologo_table">
-        <h1>Odontologos</h1>
-        <div class="row col-md-6 table-responsive">
+        <h1>Odontólogos</h1>
+        <div class="row col-md-12 table-responsive">
             <table id="odontologoTable" class="table table-striped">
                 <thead>
                 <tr>
@@ -42,37 +141,41 @@
             </table>
         </div>
     </div>
+
+    <!-- Formulario para modificar odontólogos -->
     <div class="row">
-        <div class="col-sm-6" style="display: none;
-											background-color:#e6fffa; padding:10px; border-radius:3px"
-             id="div_odontologo_updating">
+        <div class="col-sm-6" style="display: none;" id="div_odontologo_updating">
             <form id="update_odontologo_form">
                 <div class="form-group">
-                    <label >Id:</label>
+                    <label>Id:</label>
                     <input type="text" class="form-control" id="odontologo_id" readonly>
                 </div>
                 <div class="form-group">
-                    <label >Nombre:</label>
+                    <label>Nombre:</label>
                     <input type="text" class="form-control" placeholder="nombre" id="nombre">
                 </div>
                 <div class="form-group">
-                    <label >Apellido:</label>
+                    <label>Apellido:</label>
                     <input type="text" class="form-control" placeholder="apellido" id="apellido">
                 </div>
                 <div class="form-group">
-                    <label >Matricula:</label>
+                    <label>Matricula:</label>
                     <input type="text" class="form-control" placeholder="matricula" id="matricula">
                 </div>
 
-
                 <button type="submit" class="btn btn-primary">Modificar</button>
             </form>
-            <div id="response" style="display:none; margin:10px">
+            <div id="response">
+                ¡Datos actualizados con éxito!
             </div>
         </div>
     </div>
-    <hr>
+
+    <!-- Botón de regreso a index -->
+    <a href="/index.html" class="btn btn-secondary">Volver al Inicio</a> <!-- Botón de regreso al index -->
 </div>
-</body>
+
+<!-- Cargar el script después del contenido -->
 <script type="text/javascript" src="/js/get_odontologo.js"></script>
+</body>
 </html>

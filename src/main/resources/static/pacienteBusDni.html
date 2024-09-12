@@ -8,13 +8,82 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-pills .nav-link {
+            font-size: 1.1rem;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        #buscar_paciente_btn {
+            display: block;
+            margin: 20px auto 0 auto;
+        }
+    </style>
+
     <script type="text/javascript" src="/js/get_paciente_dni.js"></script>
 </head>
 <body>
 <div class="container">
+    <!-- Barra de navegación -->
     <ul class="nav nav-pills">
+        <!-- Ajustar la ruta según la ubicación real de pacienteAlta.html -->
         <li class="nav-item">
-            <a class="nav-link" href="/">Agregar nuevo</a>
+            <a class="nav-link" href="/pacienteAlta.html">Agregar nuevo</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/pacienteList.html">Listar todos</a>
@@ -25,7 +94,7 @@
         <h1>Buscar Paciente por DNI</h1>
         <div class="form-group">
             <label for="dni">DNI:</label>
-            <input type="text" class="form-control" id="dni" placeholder="Ingrese el dni">
+            <input type="text" class="form-control" id="dni" placeholder="Ingrese el DNI">
         </div>
         <button id="buscar_paciente_btn" class="btn btn-primary">Buscar</button>
     </div>
@@ -45,6 +114,11 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Botón de regreso a index -->
+    <a href="/index.html" class="btn btn-secondary">Volver al Inicio</a>
 </div>
+
+<script type="text/javascript" src="/js/get_paciente_dni.js"></script>
 </body>
 </html>
