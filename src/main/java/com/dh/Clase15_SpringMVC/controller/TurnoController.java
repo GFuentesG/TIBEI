@@ -1,64 +1,46 @@
 package com.dh.Clase15_SpringMVC.controller;
 
-import com.dh.Clase15_SpringMVC.entity.Odontologo;
 import com.dh.Clase15_SpringMVC.entity.Turno;
-import com.dh.Clase15_SpringMVC.exception.BadRequestException;
-import com.dh.Clase15_SpringMVC.exception.ResourceNotFoundException;
 import com.dh.Clase15_SpringMVC.service.ITurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/turnos")
 public class TurnoController {
-
     @Autowired
-    private ITurnoServicio iTurnoServicio;
+    private ITurnoServicio turnoServicio;
 
-    // Endpoint para buscar odontólogos disponibles en una fecha y hora específicas
-    @GetMapping("/disponibles")
-    public ResponseEntity<List<Odontologo>> buscarOdontologosDisponibles(
-            @RequestParam("fecha") String fecha,
-            @RequestParam("hora") String hora) throws BadRequestException, ResourceNotFoundException {
-
-        List<Odontologo> odontologosDisponibles = iTurnoServicio.buscarOdontologosDisponibles(
-                LocalDate.parse(fecha), LocalTime.parse(hora));
-        return ResponseEntity.ok(odontologosDisponibles);
-    }
-
-    // Endpoint para buscar la disponibilidad de un odontólogo específico por su nombre
-    @GetMapping("/disponibilidad")
-    public ResponseEntity<List<Turno>> buscarDisponibilidadOdontologo(
-            @RequestParam("odontologoNombre") String odontologoNombre) throws ResourceNotFoundException, BadRequestException {
-
-        List<Turno> turnos = iTurnoServicio.buscarDisponibilidadPorOdontologo(odontologoNombre);
-        return ResponseEntity.ok(turnos);
+    @GetMapping("/{id}")
+    public ResponseEntity<Turno> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(turnoServicio.buscarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<Turno> guardar(@RequestBody Map<String, String> request) throws Exception {
-        String odontologoNombre = request.get("odontologoNombre");
-        String pacienteNombre = request.get("pacienteNombre");
-        String fecha = request.get("fecha");
-        String hora = request.get("hora");
-
-        Turno turno = iTurnoServicio.guardar(odontologoNombre, pacienteNombre, fecha, hora);
-        return ResponseEntity.ok(turno);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Turno> consultarPorId(@PathVariable Long id) throws ResourceNotFoundException {
-        return ResponseEntity.ok(iTurnoServicio.consultarPorId(id));
+    public ResponseEntity<Turno> guardar(@RequestBody Turno turno) {
+        return ResponseEntity.ok(turnoServicio.guardar(turno));
     }
 
     @GetMapping
     public ResponseEntity<List<Turno>> listarTodos() {
-        return ResponseEntity.ok(iTurnoServicio.listarTodos());
+        return ResponseEntity.ok(turnoServicio.listarTodos());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Turno> actualizar(@PathVariable Long id, @RequestBody Turno turno) {
+        return ResponseEntity.ok(turnoServicio.actualizar(turno, id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        return ResponseEntity.ok(turnoServicio.eliminar(id));
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Turno>> buscarPorOdontologoYPaciente(@RequestParam String nombreOdontologo, @RequestParam String nombrePaciente) {
+        return ResponseEntity.ok(turnoServicio.buscarPorOdontologoYPaciente(nombreOdontologo, nombrePaciente));
     }
 }

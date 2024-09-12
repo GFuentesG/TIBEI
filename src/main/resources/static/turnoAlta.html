@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Agendar Turno</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa; /* Fondo claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Altura mínima de la pantalla */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff; /* Fondo blanco para el contenedor */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            width: 100%;
+            max-width: 600px; /* Tamaño máximo del formulario */
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: #007bff; /* Color azul Bootstrap */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold; /* Letras de etiquetas en negrita */
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-right: 10px; /* Espacio entre botones */
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary, .btn-info {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .btn-info {
+            margin-left: 10px; /* Espacio entre botones */
+        }
+
+        #response {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #d4edda;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+            color: #155724;
+        }
+
+        /* Centrar los botones dentro del formulario */
+        .form-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3>Agendar Turno</h3>
+    <form id="add_new_turno">
+        <div class="form-group">
+            <label class="control-label" for="odontologo">Odontólogo:</label>
+            <select class="form-control" id="odontologo" required>
+                <!-- Aquí se cargarán los odontólogos desde el JS -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="paciente">Paciente:</label>
+            <select class="form-control" id="paciente" required>
+                <!-- Aquí se cargarán los pacientes desde el JS -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="fecha">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" required>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="hora">Hora:</label>
+            <input type="time" class="form-control" id="hora" required>
+        </div>
+
+        <!-- Botones del formulario -->
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-danger" id="btn-add-new-turno">Guardar</button>
+            <a href="/index.html" class="btn btn-secondary">Volver al Inicio</a>
+            <a href="/turnoList.html" class="btn btn-info">Listar Turnos</a>
+        </div>
+    </form>
+
+    <div id="response" style="display: none;">
+        ¡Turno agregado con éxito!
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/post_turno.js"></script>
+</body>
+</html>
