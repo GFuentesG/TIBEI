@@ -13,7 +13,7 @@ Nuestro Sistema para Clinicas, Registro de Odontologos y Pacientes, tiene como c
 - Eliminacion de perfil de Paciente
 - Busqueda de Pacierte por DNI           
 - Registro de domicilio del Paciente
-- Registro de turno de atencion para el Paciente   ******* PENDIENTE
+- Registro de turnos de atencion
 
 
 ## Se ha utilizado las tecnologias como:
@@ -30,7 +30,7 @@ Nuestro Sistema para Clinicas, Registro de Odontologos y Pacientes, tiene como c
 ## Se ha utilizado excepciones como:
 
 - ResourceNotFoundException
-- BadRequestException      ************ PENDIENTE
+- BadRequestException
 
 El objetivo de este desarrollo es familiarizarse con las caracteristicas del lenguaje Java
 y los diferentes framework, librerias y la interconexion del FrontEnd con el BackEnd
@@ -42,13 +42,12 @@ El Sistema tiene como inicio el archivo index.html que tiene enlace a las difere
 
 
 ### Pre-condicion:
-- Para probar el funcionamiento primero se debe ingresar datos de Odontologo o del Paciente, luego se podra listar, modificar, eliminar segun lo que desee probar el usuario
-- De preferencia contar con acceso a internet para visualizar unos estilos basicos       *******  PENDIENTE CONFIRMAR
+- Para probar el funcionamiento primero se debe ingresar datos de Odontologo y del Paciente, luego se podra listar, modificar, eliminar segun lo que desee probar el usuario y seguidamente podra agendar y listar los turnos
 
 
 ### Los parametros para el ingreso de datos son:
 
--  Odontologo: 
+- Odontologo: 
     - nombre
     - apellido
     - matricula
@@ -62,8 +61,10 @@ El Sistema tiene como inicio el archivo index.html que tiene enlace a las difere
         - numero
         - localidad
         - provincia
-    - turno:
-        - fecha
-        - hora
+- turno:
+    - Odontologo
+    - Paciente
+    - fecha
+    - hora
  
 
