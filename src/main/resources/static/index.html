@@ -1,30 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Clinica Odontologica</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<!--   <script type="text/javascript" src="/js/post_odontologo.js"></script>-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVICIO ODONTOLÓGICO GESTIÓN DE SERVICIOS</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link" href="/odontologoList.html">Listado de Odontologos</a>
-            <a class="nav-link" href="/odontologoAlta.html">Alta de Odontologos</a>
-            <a class="nav-link" href="/pacienteList.html">Listado de Pacientes</a>
-            <a class="nav-link" href="/pacienteAlta.html">Alta de Pacientes</a>
-            <a class="nav-link" href="/odontologoBusMatri.html">Busqueda de Odontologo por Matricula</a>
-            <a class="nav-link" href="/pacienteBusDni.html">Busqueda de Paciente por DNI</a>
+<!-- Encabezado -->
+<header class="header">
+    <h1>CLÍNICA ODONTOLOGICA</H1>
+    <h1>GESTIÓN DE SERVICIOS</h1>
+</header>
 
-        </li>
-    </ul>
+<!-- Contenido principal -->
+<main class="container">
+    <section class="selection">
+        <h2>Elige una opción</h2>
+        <div class="grid-container">
 
-    <hr>
-</div>
+            <!-- Opción 1: Gestión de Odontólogos -->
+            <div class="grid-item">
+                <img src="img/odontologo.jpg" alt="Gestión de Odontólogos" style="width: 100%; height: auto; border-radius: 8px;">
+                <h3>Gestión de Odontólogos</h3>
+                <p>Aquí puedes gestionar los datos de los odontólogos: alta, baja y actualización de información.</p>
+                <a href="odontologoAlta.html" class="button">Ir a Odontólogos</a>
+            </div>
+
+            <!-- Opción 2: Gestión de Pacientes -->
+            <div class="grid-item">
+                <img src="img/paciente.jpg" alt="Gestión de Pacientes" style="width: 100%; height: auto; border-radius: 8px;">
+                <h3>Gestión de Pacientes</h3>
+                <p>Maneja la información de los pacientes, desde el registro hasta la actualización de sus datos.</p>
+                <a href="pacienteAlta.html" class="button">Ir a Pacientes</a>
+            </div>
+
+            <!-- Opción 3: Gestión de Turnos -->
+            <div class="grid-item">
+                <img src="img/turno.png" alt="Gestión de Turnos" style="width: 100%; height: auto; border-radius: 8px;">
+                <h3>Gestión de Turnos</h3>
+                <p>Administra los turnos de los pacientes con los odontólogos, así como la asignación de citas.</p>
+                <a href="turno.html" class="button">Ir a Turnos</a>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<!-- Pie de página -->
+<footer>
+    <p>&copy; 2024 SERVICIO ODONTOLÓGICO GESTIÓN DE SERVICIOS. Todos los derechos reservados.</p>
+</footer>
 </body>
 </html>

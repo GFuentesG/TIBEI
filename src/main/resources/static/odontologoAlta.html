@@ -1,55 +1,256 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Odontologo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Odontólogos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/get_odontologo.js" defer></script> <!-- Script para obtener los odontólogos -->
+    <script src="js/post_odontologo.js" defer></script>
+    <script src="js/delete_odontologo.js" defer></script>
+    <script src="js/update_odontologo.js" defer></script>
+    <script src="js/get_odontologo_matricula.js" defer></script>
+    <script src="js/odontologo_tabs.js" defer></script> <!-- Manejo de las pestañas -->
+    <style>
+        /* Alinear los botones en una sola fila */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
 
+        .tab-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 5px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .tab-button.active {
+            background-color: #155aaf;
+        }
+
+        .tab-button:hover {
+            background-color: #357abd;
+        }
+
+        /* Botón para volver al índice */
+        #back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #555;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #back-button:hover {
+            background-color: #333;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link" href="/odontologoList.html">Listar Odontologos</a>
-        </li>
-    </ul>
-    <div class="row">
-        <div class="col-sm-7" style="background-color:#e6fffa; padding:10px; border-radius:3px">
-            <h3>Agregar Odontologos</h3>
-            <form id="add_new_odontologo">
-                <div class="form-group">
-                    <label class="control-label" for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre"
-                           placeholder="Ingrese el nombre"
-                           name="nombre" required></input>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="apellido">Apellido:</label>
-                    <input type="text" class="form-control" id="apellido"
-                           placeholder="Ingrese el apellido"
-                           name="apellido" required></input>
-                </div>
+<!-- Botón de regreso al index -->
+<a href="index.html" id="back-button">Regresar</a>
 
-                <div class="form-group">
-                    <label class="control-label" for="matricula">Matricula:</label>
-                    <input type="text" class="form-control" id="matricula"
-                           placeholder="Ingrese la matricula"
-                           name="matricula" required></input>
-                </div>
+<!-- Encabezado -->
+<header class="header">
+    <h1>Gestión de Odontólogos</h1>
+</header>
+
+<!-- Contenedor principal -->
+<main class="container">
+    <div class="tabs">
+        <!-- Pestañas -->
+        <button class="tab-button" onclick="openTab(event, 'alta')">Alta Odontólogo</button>
+        <button class="tab-button active" onclick="openTab(event, 'listado')">Listado de Odontólogos</button> <!-- Por defecto, listado activo -->
+        <button class="tab-button" onclick="openTab(event, 'actualizar')">Actualizar Odontólogo</button>
+        <button class="tab-button" onclick="openTab(event, 'eliminar')">Eliminar Odontólogo</button>
+        <button class="tab-button" onclick="openTab(event, 'buscar')">Buscar por Matrícula</button>
+    </div>
+
+    <!-- Sección Listado de Odontólogos -->
+    <div id="listado" class="tab-content" style="display: block;">
+        <h2>Listado de Odontólogos</h2>
+        <table id="odontologoTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Matrícula</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Los odontólogos serán listados por el script get_odontologo.js -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Sección Alta de Odontólogos -->
+    <div id="alta" class="tab-content" style="display: none;">
+        <h2>Alta de Odontólogo</h2>
+        <form id="form-alta">
+            <label for="nombre-alta">Nombre:</label>
+            <input type="text" id="nombre-alta" name="nombre" required>
+
+            <label for="apellido-alta">Apellido:</label>
+            <input type="text" id="apellido-alta" name="apellido" required>
+
+            <label for="matricula-alta">Matrícula:</label>
+            <input type="text" id="matricula-alta" name="matricula" required>
+
+            <button type="submit">Registrar Odontólogo</button>
+        </form>
+    </div>
+
+    <!-- Sección Actualizar Odontólogo -->
+    <div id="actualizar" class="tab-content" style="display: none;">
+        <h2>Actualizar Odontólogo</h2>
+        <form id="form-actualizar">
+            <label for="odontologo_id-actualizar">ID:</label>
+            <input type="text" id="odontologo_id-actualizar" name="odontologo_id" required readonly
+                   style="background-color: #e9ecef; cursor: not-allowed; border: 1px solid #ced4da;"> <!-- Estilos para no editable -->
+
+            <label for="nombre-actualizar">Nuevo Nombre:</label>
+            <input type="text" id="nombre-actualizar" name="nombre">
+
+            <label for="apellido-actualizar">Nuevo Apellido:</label>
+            <input type="text" id="apellido-actualizar" name="apellido">
+
+            <label for="matricula-actualizar">Nueva Matrícula:</label>
+            <input type="text" id="matricula-actualizar" name="matricula">
+
+            <button type="submit">Actualizar Odontólogo</button>
+        </form>
+    </div>
 
 
-                <button type="submit" class="btn btn-danger"
-                        id="btn-add-new-odontologo">Guardar</button>
-            </form>
-            <div id="response" style="display:none; margin-top:10px">
-            </div>
+    <!-- Sección Eliminar Odontólogo -->
+    <div id="eliminar" class="tab-content" style="display: none;">
+        <h2>Eliminar Odontólogo</h2>
+        <form id="form-eliminar">
+            <label for="matricula-eliminar">Matrícula del Odontólogo:</label>
+            <input type="text" id="matricula-eliminar" name="matricula-eliminar" required>
+            <button type="submit">Eliminar Odontólogo</button>
+        </form>
+    </div>
+
+    <!-- Sección Buscar por Matrícula -->
+    <div id="buscar" class="tab-content" style="display: none;">
+        <h2>Buscar Odontólogo por Matrícula</h2>
+        <form id="form-buscar">
+            <label for="matricula-buscar">Matrícula:</label>
+            <input type="text" id="matricula-buscar" name="matricula" required>
+            <button type="button" id="buscar_odontologo_btn">Buscar</button>
+        </form>
+
+        <!-- Resultados de la búsqueda -->
+        <div id="odontologo_resultado" style="display: none;">
+            <h3>Resultado:</h3>
+            <table id="odontologoTableBody">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Matrícula</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Los resultados serán agregados aquí -->
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
+</main>
+
+<!-- Pie de página -->
+<footer>
+    <p>&copy; 2024 Gestión de Odontólogos. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    // Confirmación antes de realizar el alta
+    document.querySelector('#form-alta').addEventListener('submit', function (event) {
+        if (!confirm('¿Estás seguro de que deseas registrar este odontólogo?')) {
+            event.preventDefault();
+        }
+    });
+
+    // Confirmación antes de actualizar
+    document.querySelector('#form-actualizar').addEventListener('submit', function (event) {
+        if (!confirm('¿Estás seguro de que deseas actualizar los datos de este odontólogo?')) {
+            event.preventDefault();
+        }
+    });
+
+    // Confirmación antes de eliminar
+    document.querySelector('#form-eliminar').addEventListener('submit', function (event) {
+        if (!confirm('¿Estás seguro de que deseas eliminar este odontólogo?')) {
+            event.preventDefault();
+        }
+    });
+
+    // Función para cargar los odontólogos en la tabla
+    window.addEventListener('load', function () {
+        (function() {
+            const url = '/odontologos';  // Endpoint para obtener los odontólogos
+            const settings = {
+                method: 'GET'
+            };
+
+            // Llamada a la API para obtener los odontólogos
+            fetch(url, settings)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Verificación de los datos en la consola
+                // Obtenemos la tabla donde vamos a insertar los datos
+                let tableBody = document.querySelector("#odontologoTable tbody");
+
+                // Limpiar contenido previo (si existe)
+                tableBody.innerHTML = '';
+
+                // Iteramos sobre los odontólogos recibidos
+                for (let odontologo of data) {
+                    // Creamos una fila para cada odontólogo
+                    let row = tableBody.insertRow();
+
+                    // Insertamos celdas en la fila
+                    let cellId = row.insertCell(0);
+                    let cellNombre = row.insertCell(1);
+                    let cellApellido = row.insertCell(2);
+                    let cellMatricula = row.insertCell(3);
+
+                    // Asignamos los datos a las celdas
+                    cellId.innerHTML = odontologo.id;
+                    cellNombre.innerHTML = odontologo.nombre;
+                    cellApellido.innerHTML = odontologo.apellido;
+                    cellMatricula.innerHTML = odontologo.matricula;
+
+                    // Crear celdas de acciones
+                    let cellActions = row.insertCell(4);
+                    cellActions.innerHTML = `
+                        <button onclick="deleteBy(${odontologo.id})">Eliminar</button>
+                        <button onclick="findBy(${odontologo.id})">Actualizar</button>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error al cargar los odontólogos:', error);
+            });
+        })();
+    });
+</script>
+
 </body>
-<script type="text/javascript" src="/js/post_odontologo.js"></script>
 </html>
