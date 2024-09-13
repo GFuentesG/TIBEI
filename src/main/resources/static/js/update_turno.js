@@ -9,10 +9,10 @@ window.addEventListener('load', function () {
         const formData = {
             id: parseInt(turnoId), // Convierte a número si es necesario
             odontologo: {
-                id: parseInt(document.querySelector('#odontologo_id').value) // Convierte a número
+                id: parseInt(document.querySelector('#odontologo_id').value)
             },
             paciente: {
-                id: parseInt(document.querySelector('#paciente_id').value) // Convierte a número
+                id: parseInt(document.querySelector('#paciente_id').value)
             },
             fecha: document.querySelector('#fecha').value,
             hora: document.querySelector('#hora').value
@@ -37,12 +37,13 @@ window.addEventListener('load', function () {
                 return response.json();
             })
             .then(data => {
-                alert('Turno actualizado exitosamente');
+                //alert('Turno actualizado exitosamente');
                 resetForm();
+                 window.location.href = '/turnoList.html';
             })
             .catch(error => {
                 console.error('Error al actualizar el turno:', error);
-                alert('Error al actualizar el turno: ' + error);
+                //alert('Error al actualizar el turno: ' + error);
             });
     });
 
