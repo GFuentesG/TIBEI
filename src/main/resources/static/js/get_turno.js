@@ -30,16 +30,12 @@ window.addEventListener('load', function () {
                         turno.id +
                         '</button>';
 
-                    let odontologoNombre = turno.odontologo ? turno.odontologo.nombre.toUpperCase() + ' ' + turno.odontologo.apellido.toUpperCase() : 'No Disponible';
-                    let pacienteNombre = turno.paciente ? turno.paciente.nombre.toUpperCase() + ' ' + turno.paciente.apellido.toUpperCase() : 'No Disponible';
-
                     turnoRow.innerHTML = '<td>' + updateButton + '</td>' +
-                        '<td class="td_odontologo">' + odontologoNombre + '</td>' +
-                        '<td class="td_paciente">' + pacienteNombre + '</td>' +
+                        '<td class="td_odontologo">' + (turno.odontologo ? turno.odontologo.nombre.toUpperCase() + ' ' + turno.odontologo.apellido.toUpperCase() : 'No Disponible') + '</td>' +
+                        '<td class="td_paciente">' + (turno.paciente ? turno.paciente.nombre.toUpperCase() + ' ' + turno.paciente.apellido.toUpperCase() : 'No Disponible') + '</td>' +
                         '<td class="td_fecha">' + turno.fecha + '</td>' +
                         '<td class="td_hora">' + turno.hora + '</td>' +
                         '<td>' + deleteButton + '</td>';
-
                 }
             })
             .catch(error => {
