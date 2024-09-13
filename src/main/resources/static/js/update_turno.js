@@ -7,18 +7,18 @@ window.addEventListener('load', function () {
         let turnoId = document.querySelector('#turno_id').value;
 
         const formData = {
-            id: turnoId,
+            id: parseInt(turnoId), // Convierte a número si es necesario
             odontologo: {
-                id: document.querySelector('#odontologo_id').value
+                id: parseInt(document.querySelector('#odontologo_id').value) // Convierte a número
             },
             paciente: {
-                id: document.querySelector('#paciente_id').value
+                id: parseInt(document.querySelector('#paciente_id').value) // Convierte a número
             },
             fecha: document.querySelector('#fecha').value,
             hora: document.querySelector('#hora').value
         };
 
-        console.log('Datos a enviar:', formData); // Agregado para depuración
+        console.log('Datos a enviar:', formData);
 
         const url = '/turnos/' + turnoId;
         const settings = {
