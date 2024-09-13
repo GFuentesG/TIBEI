@@ -6,8 +6,12 @@ window.addEventListener('load', function () {
 
         // Datos del nuevo turno a guardar
         const formData = {
-            odontologoId: document.querySelector('#odontologo').value,
-            pacienteId: document.querySelector('#paciente').value,
+            odontologo: {
+                id: document.querySelector('#odontologo').value
+            },
+            paciente: {
+                id: document.querySelector('#paciente').value
+            },
             fecha: document.querySelector('#fecha').value,
             hora: document.querySelector('#hora').value
         };
@@ -50,4 +54,36 @@ window.addEventListener('load', function () {
         document.querySelector('#fecha').value = "";
         document.querySelector('#hora').value = "";
     }
+
+    // Función para cargar odontólogos y pacientes
+    function loadOptions() {
+        fetch('/odontologos')
+            .then(response => response.json())
+            .then(data => {
+                const odontologoSelect = document.querySelector('#odontologo');
+                data.forEach(odontologo => {
+                    const option = document.createElement('option');
+                    option.value = odontologo.id;
+                    option.textContent = odontologo.nombre;
+                    odontologoSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar odontólogos:', error));
+
+        fetch('/pacientes')
+            .then(response => response.json())
+            .then(data => {
+                const pacienteSelect = document.querySelector('#paciente');
+                data.forEach(paciente => {
+                    const option = document.createElement('option');
+                    option.value = paciente.id;
+                    option.textContent = paciente.nombre;
+                    pacienteSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar pacientes:', error));
+    }
+
+    // Cargar las opciones al cargar la página
+    loadOptions();
 });

@@ -9,10 +9,12 @@ window.addEventListener('load', function () {
         fetch(url, settings)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                console.log('Datos recibidos:', data); // Para depuración
+                const tableBody = document.getElementById("turnoTableBody");
+                tableBody.innerHTML = ''; // Limpiar tabla antes de agregar nuevos datos
+
                 for (let turno of data) {
-                    var table = document.getElementById("turnoTable");
-                    var turnoRow = table.insertRow();
+                    var turnoRow = tableBody.insertRow();
                     let tr_id = 'tr_' + turno.id;
                     turnoRow.id = tr_id;
 
@@ -28,12 +30,16 @@ window.addEventListener('load', function () {
                         turno.id +
                         '</button>';
 
+                    let odontologoNombre = turno.odontologo ? turno.odontologo.nombre.toUpperCase() + ' ' + turno.odontologo.apellido.toUpperCase() : 'No Disponible';
+                    let pacienteNombre = turno.paciente ? turno.paciente.nombre.toUpperCase() + ' ' + turno.paciente.apellido.toUpperCase() : 'No Disponible';
+
                     turnoRow.innerHTML = '<td>' + updateButton + '</td>' +
-                        '<td class="td_odontologo">' + turno.odontologo.nombre.toUpperCase() + ' ' + turno.odontologo.apellido.toUpperCase() + '</td>' +
-                        '<td class="td_paciente">' + turno.paciente.nombre.toUpperCase() + ' ' + turno.paciente.apellido.toUpperCase() + '</td>' +
+                        '<td class="td_odontologo">' + odontologoNombre + '</td>' +
+                        '<td class="td_paciente">' + pacienteNombre + '</td>' +
                         '<td class="td_fecha">' + turno.fecha + '</td>' +
                         '<td class="td_hora">' + turno.hora + '</td>' +
                         '<td>' + deleteButton + '</td>';
+
                 }
             })
             .catch(error => {
